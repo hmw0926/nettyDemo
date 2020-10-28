@@ -1,0 +1,18 @@
+Netty TCP粘包/拆包问题的解决之道
+
+TCP是个“流”协议，“流”是没有界限的一串数据，连成一片，其间没有分界线。TCP底层并不了解上层业务
+数据的具体含义，它会根据TCP缓冲区的实际情况进行包的划分，业务上一个完整包可能被TCP拆成多个包
+进行发送，也可能把多个小的包封装成一个大的数据发送，这就是TCP粘包和拆包问题。
+
+node1：反面教材
+Client发送100个"QUERY TIME ORDER"到服务器，但是服务器接收到"QUERY TIME ORDER QUERY TIME ORDER..."，是粘连的结果
+
+node2：解决方案:行解码器
+TimeClient 与 TimeServer
+// TODO 添加行解码器LineBasedFrameDecoder
+ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+ch.pipeline().addLast(new StringDecoder());
+
+TimeClientHandler
+// todo 添加换行符，System.getProperty("line.separator") >>> 获取操作系统对应的换行符
+req = ("QUERY TIME ORDER" + System.getProperty("line.separator")).getBytes();

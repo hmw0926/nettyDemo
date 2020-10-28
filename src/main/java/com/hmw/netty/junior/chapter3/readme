@@ -1,3 +1,4 @@
+Netty入门应用
 一、pom.xml导入依赖
 <dependency>
      <groupId>io.netty</groupId>
@@ -5,4 +6,6 @@
      <version>5.0.0.Alpha2</version>
 </dependency>
 
-二、运行TimeServer、TimeClient,由TimeClientHandler.channelActive发送消息,到服务端接收
+二、运行TimeServer、TimeClient
+
+三、运行结果，TimeClientHandler.channelActive发送消息,服务端接收
