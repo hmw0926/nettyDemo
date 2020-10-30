@@ -1,3 +1,4 @@
 Netty 分隔符和定长解码器的应用
 node1 DelimiterBasedFrameDecoder分隔符应用开发
+node2 FixedLengthFrameDecoder长解码器的应用开发
 
